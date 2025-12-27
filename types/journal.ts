@@ -6,6 +6,7 @@ export const JournalInsertSchema = z.object({
 
 export interface Journal {
   _id: string;
-  content: string | null;
+  content: string ;
   date: string
+  streakAtDate: number
 }

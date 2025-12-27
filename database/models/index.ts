@@ -15,7 +15,13 @@ const JournalSchema = new mongoose.Schema<IJournalSchema>({
     type: SchemaTypes.String,
     unique: true,
     default: getTodayDate,
-    index: true
+    index: true,
+    required: true
+  },
+  streakAtDate: {
+    type: SchemaTypes.Number,
+    default: 1,
+    required: true
   }
 })
 

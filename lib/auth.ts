@@ -3,8 +3,8 @@ import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
 
-if(!process.env.USERNAME || !process.env.PASSWORD || !process.env.JWT_SECRET){
-  throw new Error("Environment variables: USERNAME, PASSWORD and JWT_SECRET not set")
+if(!process.env.USER || !process.env.PASSWORD || !process.env.JWT_SECRET){
+  throw new Error("Environment variables: USER, PASSWORD and JWT_SECRET not set")
 }
 
 const JWT_SECRET = process.env.JWT_SECRET!;
@@ -14,7 +14,7 @@ const JWT_EXPIRES_IN = "7d";
 
 export type JwtPayload = {
   userid: number;
-  username: string;
+  USER: string;
   message: string;
   motto: string;
 };
@@ -22,7 +22,7 @@ export type JwtPayload = {
 export function signToken(): string {
   const payload: JwtPayload = {
     userid: 1,
-    username: process.env.USERNAME!,
+    USER: process.env.USER!,
     message: "It is a good day to journal",
     motto: "Be grateful"
   }
@@ -40,8 +40,10 @@ export function verifyToken(token: string): JwtPayload | null {
 }
 
 
-export const validateLogin = (username: string, password: string) => {
-  return (username == process.env.USERNAME && password == process.env.PASSWORD)
+export const validateLogin = (USER: string, password: string) => {
+  console.log({USER, password})
+  console.log(process.env.USER, process.env.PASSWORD)
+  return (USER == process.env.USER && password == process.env.PASSWORD)
 }
 
 

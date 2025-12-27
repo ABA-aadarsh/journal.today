@@ -8,6 +8,7 @@ export const GET = async () => {
   await authenticateRoute()
   await Database.connect()
   const journal = await JournalController.getTodaysJournal()
+  if(!journal) return NextResponse.json({data: {content: ""}});
   return NextResponse.json({data: journal})
 }
 
