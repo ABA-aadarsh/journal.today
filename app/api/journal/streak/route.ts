@@ -1,4 +1,5 @@
 import JournalController from "@/controller/journal";
+import Database from "@/database";
 import { authenticateRoute } from "@/lib/auth-route";
 import { NextResponse } from "next/server";
 // export const revalidate = 3600;
@@ -6,6 +7,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   await authenticateRoute()
   try {
+    await Database.connect()
     const streak = await JournalController.getStreak();
     return NextResponse.json(
       { streak }
